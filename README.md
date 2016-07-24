@@ -8,11 +8,21 @@ This is an x-cursor theme inspired by macOS and based on KDE Breeze. It was crea
 Capitaine cursors is based on KDE Breeze cursors, as such it falls under the same license.
 Capitaine cursors is LGPLv3. See COPYING for more details.
 
-## Building
+## Building & Installing
 You'll find everything you need to build and modify this cursor set in this repository. To build the cursor set from the PNG source run:
 
     ./build.sh
 
-to generate the pixmaps and appropriate aliases.
+to generate the pixmaps and appropriate aliases. The compiled cursor theme is located in `build/`
 
-The PNGs were exported directly from the SVGs in Inkscape, though I plan to modify the build script to automate this process in the next release.
+To install the cursor theme simply copy the compiled theme to your icons directory. For local user installation:
+
+    cp -pr build/ ~/.icons/capitaine-cursors
+
+For system-wide installation for all users:
+
+    sudo cp -pr build /usr/share/icons/capitaine-cursors
+    sudo chmod -R 644 /usr/share/icons/capitaine-cursors
+
+## Notes
+The PNGs found in this repository were exported directly from the SVG source in Inkscape when I made this cursor theme, though I plan to modify the build script such that only the SVG source will be required to build in the next release.
