@@ -8,37 +8,41 @@ PWD=$(pwd)
 OUTPUT="$PWD"/build/cursors
 ALIASES="$PWD"/cursorList
 
+if [ ! -d "$OUTPUT" ]; then
+    mkdir "$OUTPUT"
+fi
+
 echo -ne "Generating cursor theme...\\r"
 for CUR in config/*.cursor; do
-	BASENAME=$CUR
-	BASENAME=${BASENAME##*/}
-	BASENAME=${BASENAME%.*}
+	BASENAME="$CUR"
+	BASENAME="${BASENAME##*/}"
+	BASENAME="${BASENAME%.*}"
 	
-	xcursorgen $CUR $OUTPUT/$BASENAME
+	xcursorgen "$CUR" "$OUTPUT/$BASENAME"
 done
 echo -e "Generating cursor theme... DONE"
 
-cd $OUTPUT	
+cd "$OUTPUT"	
 
 #generate aliases
 echo -ne "Generating shortcuts...\\r"
 while read ALIAS; do
-	FROM=${ALIAS#* }
-	TO=${ALIAS% *}
+	FROM="${ALIAS#* }"
+	TO="${ALIAS% *}"
 
 	if [ -e $TO ]; then
 		continue
 	fi
 	ln -sr "$FROM" "$TO"
-done < $ALIASES
+done < "$ALIASES"
 echo -e "Generating shortcuts... DONE"
 
-cd $PWD
+cd "$PWD"
 
 echo -ne "Generating Theme Index...\\r"
-INDEX="$OUTPUT/index.theme"
-if ! [ -e $OUTPUT/$INDEX ]; then
-	touch $INDEX
-	echo -e "[Icon Theme]\nName=Capitaine Cursors\n" > index.theme
+INDEX="$OUTPUT/../index.theme"
+if [ ! -e "$OUTPUT/../$INDEX" ]; then
+	touch "$INDEX"
+	echo -e "[Icon Theme]\nName=Capitaine Cursors\n" > "$INDEX"
 fi
 echo -e "Generating Theme Index... DONE"
