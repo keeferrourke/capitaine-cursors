@@ -10,7 +10,7 @@ Capitaine cursors is based on KDE Breeze cursors, as such it falls under the sam
 Capitaine cursors is LGPLv3. See COPYING for more details.
 
 ## Notes
-The PNGs files were exported directly from the SVG sources in the Inkscape GUI when I initially made this cursor theme -- I plan to modify the build script such that only the SVG source will be required to build in the next release.
+The PNGs files in `src/` were exported directly from the SVG sources in the Inkscape GUI when I initially made this cursor theme -- I plan to modify the build script such that only the SVG source will be required to build in the next release.
 
 ## Installation
 ### \*NIXes, \*BSDs, and possibly others
