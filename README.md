@@ -35,6 +35,9 @@ You'll find everything you need to build and modify this cursor set in the `src/
 
 to generate the pixmaps and appropriate aliases. The freshly compiled cursor theme will be located in `src/build/`
 
+#Donations
+I'm a poor computer science student &ndash; and I provide my work to the community free of charge. If you like this cursor theme and want to support me or buy me a coffee, please feel free to [donate](https://paypal.me/keeferrourke)
+
 ## Preview
 ![](preview.png)
 
