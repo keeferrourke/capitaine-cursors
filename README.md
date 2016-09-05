@@ -3,14 +3,11 @@ This is an x-cursor theme inspired by macOS and based on KDE Breeze. The source 
 
 Everything you need to build the xcursor theme is found in `src/`, and the prebuilt theme is found in `bin/xcursor/`
 
-There is also a Windows cursor theme available in `bin/windows/`, though it is not buildable from source. It also will not receive substantial updates.
+There is also a Windows cursor theme available in `bin/windows/`, though it is not buildable from source due to the broken nature of Microsoft's operating system. It also will not receive substantial updates.
 
 ## License
 Capitaine cursors is based on KDE Breeze cursors, as such it falls under the same license.
 Capitaine cursors is LGPLv3. See COPYING for more details.
-
-## Notes
-The PNGs files in `src/` were exported directly from the SVG sources in the Inkscape GUI when I initially made this cursor theme -- I plan to modify the build script such that only the SVG source will be required to build in the next release.
 
 ## Installation
 ### \*NIXes, \*BSDs, and possibly others
@@ -28,14 +25,14 @@ Then set the theme with your preferred desktop tools.
 The Windows build comes with an INF file to make installation easy. Open `bin/windows` in Explorer, and right click on `install.inf`. Click 'Install' from the context menu, and authorise the modifications to your system. Then open Control Panel > Personalisation and Appearance > Change mouse pointers, and select Capitaine cursors. Click 'Apply'.
 
 ## Building from source
-You'll find everything you need to build and modify this cursor set in the `src/` directory. To build the xcursor set from the PNG source run:
+You'll find everything you need to build and modify this cursor set in the `src/` directory. To build the xcursor set from the SVG source run:
 
     ./build.sh
 
 to generate the pixmaps and appropriate aliases. The freshly compiled cursor theme will be located in `src/build/`
 
 ## Donations
-I'm a poor computer science student &ndash; and I provide my work to the community free of charge. If you like this cursor theme and want to support me or buy me a coffee, please feel free to [donate](https://paypal.me/keeferrourke)
+I'm a poor computer science student &ndash; and I spend many hours per week working on software and artwork for the community. If you like this cursor theme and want to support (buy me a coffee?), please consider [donating](https://paypal.me/keeferrourke).
 
 ## Preview
 ![](preview.png)
