@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="32"
+   height="32"
+   viewBox="0 0 32 32.000001"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="size_ver.svg">
+  <defs
+     id="defs4">
+    <filter
+       style="color-interpolation-filters:sRGB"
+       height="1.2148381"
+       y="-0.10741903"
+       width="1.7225544"
+       x="-0.36127725"
+       id="filter8514"
+       inkscape:collect="always">
+      <feGaussianBlur
+         id="feGaussianBlur8516"
+         stdDeviation="1.204113"
+         inkscape:collect="always" />
+    </filter>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#dcdcdc"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="15.839192"
+     inkscape:cx="1.9350465"
+     inkscape:cy="14.127113"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     units="px" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-1020.3622)">
+    <g
+       transform="translate(-23.93861,74.119958)"
+       style="display:inline"
+       id="g12792"
+       inkscape:export-filename="/home/spooky/Downloads/capitaine-cursors/size_ver.png"
+       inkscape:export-xdpi="429.86514"
+       inkscape:export-ydpi="429.86514">
+      <path
+         transform="matrix(0,-1,-1,0,669.42606,1110.4261)"
+         sodipodi:nodetypes="cccccccccccccccccccccccccsssss"
+         id="path4591-9-8-8-7-2-0-1-7-2-6-8-5-9-8-6"
+         d="m 140.87152,624.90768 c -0.0977,0.0171 -0.19284,0.0488 -0.28125,0.0937 l -6,3 c -0.68519,0.3198 -0.68519,1.4927 0,1.8125 l 6,3 c 0.5108,0.2396 1.19916,-0.0576 1.375,-0.59375 l 0.84375,-2.5 c 0.0373,-0.0999 0.0585,-0.20589 0.0625,-0.3125 l 0,-1 c -0.004,-0.10661 -0.0252,-0.21256 -0.0625,-0.3125 l -0.84375,-2.5 c -0.14169,-0.4462 -0.63024,-0.75329 -1.09375,-0.6875 z m 13.03125,0 c -0.37038,0.0526 -0.69929,0.33094 -0.8125,0.6875 l -0.84375,2.5 c -0.0373,0.0999 -0.0585,0.20589 -0.0625,0.3125 l 0,1 c 0.004,0.10661 0.0252,0.21256 0.0625,0.3125 l 0.84375,2.5 c 0.17584,0.53611 0.8642,0.83335 1.375,0.59375 l 6,-3 c 0.68519,-0.3198 0.68519,-1.4927 0,-1.8125 l -6,-3 c -0.17322,-0.0846 -0.37122,-0.11755 -0.5625,-0.0937 z m -6.40625,0.46875 c -1.92115,0 -3.5,1.57885 -3.5,3.5 0,1.92115 1.57885,3.5 3.5,3.5 1.92115,0 3.5,-1.57885 3.5,-3.5 0,-1.92115 -1.57885,-3.5 -3.5,-3.5 z"
+         style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:normal;font-family:Sans;-inkscape-font-specification:Sans;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;baseline-shift:baseline;text-anchor:start;display:inline;overflow:visible;visibility:visible;opacity:0.2;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;marker:none;filter:url(#filter8514);enable-background:accumulate"
+         inkscape:connector-curvature="0" />
+      <path
+         sodipodi:nodetypes="cccccccccccccccccccccccccsssss"
+         id="path4591-9-8-8-7-2-0-1-7-2-6-0-7-4-4"
+         d="m 44.51836,968.55453 c -0.0171,0.0977 -0.0488,0.19284 -0.0937,0.28125 l -3,6 c -0.3198,0.68519 -1.4927,0.68519 -1.8125,0 l -3,-6 c -0.2396,-0.51081 0.0576,-1.19917 0.59375,-1.37501 l 2.5,-0.84374 c 0.1,-0.0373 0.20589,-0.0585 0.3125,-0.0625 l 1,-10e-6 c 0.10663,0.004 0.21256,0.0252 0.3125,0.0625 l 2.5,0.84375 c 0.44621,0.14168 0.75329,0.63024 0.6875,1.09375 z m 0,-13.03125 c -0.0526,0.37039 -0.33093,0.6993 -0.68749,0.81251 l -2.5,0.84376 c -0.1,0.0373 -0.20588,0.0585 -0.31249,0.0625 l -1,1e-5 c -0.10663,-0.004 -0.21257,-0.0252 -0.31251,-0.0625 l -2.49999,-0.84376 c -0.5361,-0.17584 -0.83336,-0.86418 -0.59375,-1.375 l 3,-6 c 0.3198,-0.68519 1.4927,-0.68519 1.8125,0 l 3,6 c 0.0846,0.17323 0.11755,0.37122 0.0937,0.5625 z m -0.46875,6.40625 c 0,1.92115 -1.57885,3.5 -3.5,3.49999 -1.92115,0 -3.5,-1.57885 -3.49999,-3.49999 -10e-6,-1.92115 1.57884,-3.5 3.49999,-3.5 1.92115,0 3.5,1.57885 3.5,3.5 z"
+         style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:normal;font-family:Sans;-inkscape-font-specification:Sans;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;baseline-shift:baseline;text-anchor:start;display:inline;overflow:visible;visibility:visible;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;marker:none;enable-background:accumulate"
+         inkscape:connector-curvature="0" />
+      <path
+         sodipodi:nodetypes="cccccccccccc"
+         inkscape:connector-curvature="0"
+         style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:normal;font-family:Sans;-inkscape-font-specification:Sans;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;baseline-shift:baseline;text-anchor:start;display:inline;overflow:visible;visibility:visible;fill:#1a1a1a;fill-opacity:1;stroke:none;stroke-width:1px;marker:none;enable-background:accumulate"
+         d="m 43.52776,968.4077 -3.00001,6 -3,-6 2.5,-0.84375 1,0 z m -1e-5,-13 -2.49999,0.84375 -1.00001,0 -2.5,-0.84375 3,-6 z"
+         id="path4591-9-8-8-7-2-0-1-7-2-9-5-5-6" />
+      <circle
+         r="2"
+         cy="386.36218"
+         cx="45"
+         style="fill:#3daee9;fill-opacity:1;stroke:none"
+         id="path4169-06-1-5-7-9-6-03-6-4-8-4-0"
+         transform="matrix(-1.2500003,0,0,1.2500003,96.80556,478.90934)" />
+    </g>
+  </g>
+</svg>

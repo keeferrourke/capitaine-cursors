@@ -4,7 +4,6 @@
 # Copyright (c) 2016 Keefer Rourke <keefer.rourke@gmail.com>
 
 # generate cursors
-PWD=$(pwd)
 OUTPUT="$PWD"/build/cursors
 ALIASES="$PWD"/cursorList
 
