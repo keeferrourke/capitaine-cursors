@@ -5,6 +5,9 @@ Everything you need to build the xcursor theme is found in `src/`, and the prebu
 
 There is also a Windows cursor theme available in `bin/windows/`, though it is not buildable from source due to the broken nature of Microsoft's operating system. It also will not receive substantial updates.
 
+## Notes
+Building the x-cursor theme from SVG source requires a regular inkscape installation. If the build script fails, you should probably install inkscape using your preferred package manager :)
+
 ## License
 Capitaine cursors is based on KDE Breeze cursors, as such it falls under the same license.
 Capitaine cursors is LGPLv3. See COPYING for more details.
