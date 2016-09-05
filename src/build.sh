@@ -3,10 +3,30 @@
 # Capitaine cursors, macOS inspired cursors based on KDE Breeze
 # Copyright (c) 2016 Keefer Rourke <keefer.rourke@gmail.com>
 
-# generate cursors
-OUTPUT="$PWD"/build/cursors
-ALIASES="$PWD"/cursorList
+# generate pixmaps from svg source
+SRC=$PWD
 
+if [ ! -d "x1" ]; then
+    mkdir "x1"
+fi
+if [ ! -d "x2" ]; then
+    mkdir "x2"
+fi
+
+cd svg/
+find . -name "*.svg" -type f -exec sh -c 'inkscape -z -e "../x1/${0%.svg}.png" -w 32 -h 32 $0' {} \;
+find . -name "*.svg" -type f -exec sh -c 'inkscape -z -e "../x2/${0%.svg}.png" -w 64 -w 64 $0' {} \;
+
+cd $SRC
+
+# generate cursors
+BUILD="$SRC"/build
+OUTPUT="$BUILD"/cursors
+ALIASES="$SRC"/cursorList
+
+if [ ! -d "$BUILD" ]; then
+    mkdir "$BUILD"
+fi
 if [ ! -d "$OUTPUT" ]; then
     mkdir "$OUTPUT"
 fi
