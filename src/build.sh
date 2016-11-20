@@ -65,3 +65,7 @@ if [ ! -e "$OUTPUT/../$INDEX" ]; then
 	echo -e "[Icon Theme]\nName=Capitaine Cursors\n" > "$INDEX"
 fi
 echo -e "Generating Theme Index... DONE"
+echo -e "Installing"
+sudo rsync -rav build/ /usr/share/icons/capitaine-cursors/
+echo -e "Installing... DONE"
+
