@@ -4,6 +4,7 @@
 # Copyright (c) 2016 Keefer Rourke <keefer.rourke@gmail.com>
 
 # generate pixmaps from svg source
+pushd .
 SRC=$PWD
 
 if [ ! -d "x1" ]; then
@@ -66,6 +67,7 @@ if [ ! -e "$OUTPUT/../$INDEX" ]; then
 fi
 echo -e "Generating Theme Index... DONE"
 echo -e "Installing"
+popd.
 sudo rsync -rav build/ /usr/share/icons/capitaine-cursors/
 echo -e "Installing... DONE"
 
