@@ -5,8 +5,8 @@
 
 # generate pixmaps from svg source
 
-export SMALL_SIZE=64
-export LARGE_SIZE=80
+export SMALL_SIZE=80
+export LARGE_SIZE=100
 
 pushd .
 SRC=$PWD
