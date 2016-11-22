@@ -19,9 +19,8 @@ if [ ! -d "x2" ]; then
 fi
 
 cd svg/
-find . -name "*.svg" -type f -exec sh -c 'inkscape -z -e "../x1/${0%.svg}.png" -w ${SMALL_SIZE} -h ${SMALL_SIZE} $0' {} \;
-find . -name "*.svg" -type f -exec sh -c 'inkscape -z -e "../x2/${0%.svg}.png" -w ${LARGE_SIZE} -w ${LARGE_SIZE} $0' {} \;
-
+sh -c 'for f in *.svg ; do echo $f; rsvg-convert -o "../x1/$(echo $f | sed s/.svg/.png/)" -w ${SMALL_SIZE} -h ${SMALL_SIZE} "$f"; done'
+sh -c 'for f in *.svg ; do echo $f; rsvg-convert -o "../x2/$(echo $f | sed s/.svg/.png/)" -w ${LARGE_SIZE} -h ${LARGE_SIZE} "$f"; done'
 cd $SRC
 
 # generate cursors
