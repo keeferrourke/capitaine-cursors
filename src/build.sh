@@ -4,6 +4,10 @@
 # Copyright (c) 2016 Keefer Rourke <keefer.rourke@gmail.com>
 
 # generate pixmaps from svg source
+
+export SMALL_SIZE=64
+export LARGE_SIZE=80
+
 pushd .
 SRC=$PWD
 
@@ -15,8 +19,8 @@ if [ ! -d "x2" ]; then
 fi
 
 cd svg/
-find . -name "*.svg" -type f -exec sh -c 'inkscape -z -e "../x1/${0%.svg}.png" -w 64 -h 64 $0' {} \;
-find . -name "*.svg" -type f -exec sh -c 'inkscape -z -e "../x2/${0%.svg}.png" -w 80 -w 80 $0' {} \;
+find . -name "*.svg" -type f -exec sh -c 'inkscape -z -e "../x1/${0%.svg}.png" -w ${SMALL_SIZE} -h ${SMALL_SIZE} $0' {} \;
+find . -name "*.svg" -type f -exec sh -c 'inkscape -z -e "../x2/${0%.svg}.png" -w ${LARGE_SIZE} -w ${LARGE_SIZE} $0' {} \;
 
 cd $SRC
 
@@ -33,6 +37,7 @@ if [ ! -d "$OUTPUT" ]; then
 fi
 
 echo -ne "Generating cursor theme...\\r"
+config/conv.py ${SMALL_SIZE} ${LARGE_SIZE}
 for CUR in config/*.cursor; do
 	BASENAME="$CUR"
 	BASENAME="${BASENAME##*/}"
