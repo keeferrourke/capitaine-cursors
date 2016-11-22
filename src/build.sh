@@ -8,7 +8,6 @@
 export SMALL_SIZE=80
 export LARGE_SIZE=100
 
-pushd .
 SRC=$PWD
 
 if [ ! -d "x1" ]; then
@@ -71,7 +70,7 @@ if [ ! -e "$OUTPUT/../$INDEX" ]; then
 fi
 echo -e "Generating Theme Index... DONE"
 echo -e "Installing"
-popd
+cd $SRC
 sudo rsync -rav build/ /usr/share/icons/capitaine-cursors/
 echo -e "Installing... DONE"
 
