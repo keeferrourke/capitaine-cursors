@@ -24,6 +24,13 @@ For system-wide installation for all users:
 
 Then set the theme with your preferred desktop tools.
 
+#### Fedora and EPEL
+There is a third party Copr repository with ready-to-use RPMs :
+```
+sudo dnf copr enable tcg/themes
+sudo dnf install la-capitaine-cursor-theme
+```
+
 ### Windows
 The Windows build comes with an INF file to make installation easy. Open `bin/windows` in Explorer, and right click on `install.inf`. Click 'Install' from the context menu, and authorise the modifications to your system. Then open Control Panel > Personalisation and Appearance > Change mouse pointers, and select Capitaine cursors. Click 'Apply'.
 
