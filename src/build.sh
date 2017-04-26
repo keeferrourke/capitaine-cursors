@@ -4,6 +4,10 @@
 # Copyright (c) 2016 Keefer Rourke <keefer.rourke@gmail.com>
 
 # generate pixmaps from svg source
+
+export SMALL_SIZE=80
+export LARGE_SIZE=100
+
 SRC=$PWD
 
 if [ ! -d "x1" ]; then
@@ -14,9 +18,8 @@ if [ ! -d "x2" ]; then
 fi
 
 cd svg/
-find . -name "*.svg" -type f -exec sh -c 'inkscape -z -e "../x1/${0%.svg}.png" -w 32 -h 32 $0' {} \;
-find . -name "*.svg" -type f -exec sh -c 'inkscape -z -e "../x2/${0%.svg}.png" -w 64 -w 64 $0' {} \;
-
+sh -c 'for f in *.svg ; do echo $f; rsvg-convert -o "../x1/$(echo $f | sed s/.svg/.png/)" -w ${SMALL_SIZE} -h ${SMALL_SIZE} "$f"; done'
+sh -c 'for f in *.svg ; do echo $f; rsvg-convert -o "../x2/$(echo $f | sed s/.svg/.png/)" -w ${LARGE_SIZE} -h ${LARGE_SIZE} "$f"; done'
 cd $SRC
 
 # generate cursors
@@ -32,6 +35,7 @@ if [ ! -d "$OUTPUT" ]; then
 fi
 
 echo -ne "Generating cursor theme...\\r"
+config/conv.py ${SMALL_SIZE} ${LARGE_SIZE}
 for CUR in config/*.cursor; do
 	BASENAME="$CUR"
 	BASENAME="${BASENAME##*/}"
@@ -65,3 +69,8 @@ if [ ! -e "$OUTPUT/../$INDEX" ]; then
 	echo -e "[Icon Theme]\nName=Capitaine Cursors\n" > "$INDEX"
 fi
 echo -e "Generating Theme Index... DONE"
+echo -e "Installing"
+cd $SRC
+sudo rsync -rav build/ /usr/share/icons/capitaine-cursors/
+echo -e "Installing... DONE"
+

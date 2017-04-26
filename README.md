@@ -20,7 +20,7 @@ To install the cursor theme simply copy the compiled theme to your icons directo
 
 For system-wide installation for all users:
 
-    sudo cp -pr bin/xcursor /usr/share/icons/capitaine-cursors
+    sudo rsync -rav build/ /usr/share/icons/capitaine-cursors/
 
 Then set the theme with your preferred desktop tools.
 
