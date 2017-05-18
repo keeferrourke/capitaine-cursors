@@ -16,11 +16,11 @@ Capitaine cursors is LGPLv3. See COPYING for more details.
 ### \*NIXes, \*BSDs, and possibly others
 To install the cursor theme simply copy the compiled theme to your icons directory. For local user installation:
 
-    cp -pr bin/xcursor ~/.icons/capitaine-cursors
+    cp -pr bin/xcursors ~/.icons/capitaine-cursors
 
 For system-wide installation for all users:
 
-    sudo cp -pr bin/xcursor /usr/share/icons/capitaine-cursors
+    sudo cp -pr bin/xcursors /usr/share/icons/capitaine-cursors
 
 Then set the theme with your preferred desktop tools.
 
