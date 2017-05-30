@@ -5,6 +5,21 @@
 
 # generate pixmaps from svg source
 SRC=$PWD
+SVG="svg"
+
+if [ "$1" == "--light" ]; then
+	if [ ! -d "svg-light" ]; then
+    mkdir "svg-light"
+	fi
+	SVG="svg-light"
+	for file in svg/* ; do
+		if [[ $(basename $file .svg) =~ (not-allowed|wayland-cursor|zoom-in|zoom-out) ]] ; then
+			cat $file > svg-light/$(basename $file)
+			continue
+		fi
+		awk -f swap.awk $file > svg-light/$(basename $file)
+	done
+fi
 
 if [ ! -d "x1" ]; then
     mkdir "x1"
@@ -13,7 +28,7 @@ if [ ! -d "x2" ]; then
     mkdir "x2"
 fi
 
-cd svg/
+cd $SVG
 find . -name "*.svg" -type f -exec sh -c 'inkscape -z -e "../x1/${0%.svg}.png" -w 32 -h 32 $0' {} \;
 find . -name "*.svg" -type f -exec sh -c 'inkscape -z -e "../x2/${0%.svg}.png" -w 64 -w 64 $0' {} \;
 
