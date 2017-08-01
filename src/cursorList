@@ -16,6 +16,7 @@ b66166c04f8c3109214a4fbd64a50fc8 copy
 d9ce0ab605698f320427677b458ad60b help
 e29285e634086352946a0e7090d73106 pointer
 fcf21c00b30f7e3f83fe0dfd12e71cff dnd-move
+arrow default
 circle not-allowed
 closedhand dnd-move
 col-resize size_hor
