@@ -63,7 +63,7 @@ the `src/` directory. To build the xcursor theme from the SVG source
 run:
 
 ```
-./src/build.sh
+./build.sh
 
 ```
 
