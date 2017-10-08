@@ -49,10 +49,10 @@ sudo dnf install la-capitaine-cursor-theme
 ```
 
 #### Arch Linux
-There is an [AUR PKGBUILD](https://aur.archlinux.org/packages/la-capitaine-cursor-theme/)
-maintained by Wynne Plaga:
+There is an [AUR PKGBUILD](https://aur.archlinux.org/packages/capitaine-cursors/)
+maintained by caiye:
 ```
-sudo yaourt -S la-capitaine-cursor-theme
+sudo yaourt -S capitaine-cursors
 ```
 
 ### Windows
