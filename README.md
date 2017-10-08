@@ -48,6 +48,13 @@ sudo dnf copr enable tcg/themes
 sudo dnf install la-capitaine-cursor-theme
 ```
 
+#### Arch Linux
+There is an [AUR PKGBUILD](https://aur.archlinux.org/packages/la-capitaine-cursor-theme/)
+maintained by Wynne Plaga:
+```
+sudo yaourt -S la-capitaine-cursor-theme
+```
+
 ### Windows
 The Windows build comes with an INF file to make installation easy.
  1. Open `.windows/` in Explorer, and right click on `install.inf`.
