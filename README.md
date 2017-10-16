@@ -52,7 +52,7 @@ sudo dnf install la-capitaine-cursor-theme
 There is an [AUR PKGBUILD](https://aur.archlinux.org/packages/capitaine-cursors/)
 maintained by caiye:
 ```
-sudo yaourt -S capitaine-cursors
+yaourt -S capitaine-cursors
 ```
 
 ### Windows
