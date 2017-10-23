@@ -50,8 +50,14 @@ sudo dnf install la-capitaine-cursor-theme
 
 #### Arch Linux
 There is an [AUR PKGBUILD](https://aur.archlinux.org/packages/capitaine-cursors/)
-maintained by caiye:
+maintained by caiye.  
+For its installation, the `base-devel` group is needed. Install it with `pacman`:
+```bash
+sudo pacman -S base-devel
 ```
+
+Now install `captaine-cursors` for example with `yaourt`:
+```bash
 yaourt -S capitaine-cursors
 ```
 
