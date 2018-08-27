@@ -19,8 +19,9 @@ substantial updates.
 
 ## Notes
 Building the x-cursor theme from SVG source requires a regular inkscape
-installation. If the build script fails, you should probably install
-inkscape using your preferred package manager :)
+installation. It also needs a command called `xcursorgen`. If the build
+script fails, you should probably install inkscape and xcursorgen using
+your preferred package manager :)
 
 ## License
 Capitaine cursors is based on KDE Breeze cursors, as such it falls under
@@ -33,16 +34,21 @@ Capitaine cursors is LGPLv3. See COPYING for more details.
 To install the cursor theme simply copy the compiled theme to your icons
 directory. For local user installation:
 
-    cp -pr dist/ ~/.icons/capitaine-cursors
+```
+cp -pr dist/ ~/.icons/capitaine-cursors
+```
 
 For system-wide installation for all users:
 
-    sudo cp -pr dist/ /usr/share/icons/capitaine-cursors
+```
+sudo cp -pr dist/ /usr/share/icons/capitaine-cursors
+```
 
 Then set the theme with your preferred desktop tools.
 
 #### Fedora and EPEL
 There is a third party Copr repository with ready-to-use RPMs:
+
 ```
 sudo dnf copr enable tcg/themes
 sudo dnf install la-capitaine-cursor-theme
@@ -51,9 +57,11 @@ sudo dnf install la-capitaine-cursor-theme
 #### Arch Linux
 There is an [AUR PKGBUILD](https://aur.archlinux.org/packages/capitaine-cursors/)
 maintained by caiye:
+
 ```
 yaourt -S capitaine-cursors
 ```
+
 #### Ubuntu 
 [PPA](https://launchpad.net/~dyatlov-igor/+archive/ubuntu/la-capitaine) (maintained by [@igor-dyatlov](https://github.com/igor-dyatlov)):
 
@@ -79,7 +87,6 @@ run:
 
 ```
 ./build.sh
-
 ```
 
 This will generate the pixmaps and appropriate aliases.
