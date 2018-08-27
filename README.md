@@ -19,8 +19,9 @@ substantial updates.
 
 ## Notes
 Building the x-cursor theme from SVG source requires a regular inkscape
-installation. If the build script fails, you should probably install
-inkscape using your preferred package manager :)
+installation. It also needs a command called `xcursorgen`. If the build
+script fails, you should probably install inkscape and xcursorgen using
+your preferred package manager :)
 
 ## License
 Capitaine cursors is based on KDE Breeze cursors, as such it falls under
