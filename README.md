@@ -34,16 +34,21 @@ Capitaine cursors is LGPLv3. See COPYING for more details.
 To install the cursor theme simply copy the compiled theme to your icons
 directory. For local user installation:
 
-    cp -pr dist/ ~/.icons/capitaine-cursors
+```
+cp -pr dist/ ~/.icons/capitaine-cursors
+```
 
 For system-wide installation for all users:
 
-    sudo cp -pr dist/ /usr/share/icons/capitaine-cursors
+```
+sudo cp -pr dist/ /usr/share/icons/capitaine-cursors
+```
 
 Then set the theme with your preferred desktop tools.
 
 #### Fedora and EPEL
 There is a third party Copr repository with ready-to-use RPMs:
+
 ```
 sudo dnf copr enable tcg/themes
 sudo dnf install la-capitaine-cursor-theme
@@ -52,9 +57,11 @@ sudo dnf install la-capitaine-cursor-theme
 #### Arch Linux
 There is an [AUR PKGBUILD](https://aur.archlinux.org/packages/capitaine-cursors/)
 maintained by caiye:
+
 ```
 yaourt -S capitaine-cursors
 ```
+
 #### Ubuntu 
 [PPA](https://launchpad.net/~dyatlov-igor/+archive/ubuntu/la-capitaine) (maintained by [@igor-dyatlov](https://github.com/igor-dyatlov)):
 
@@ -80,7 +87,6 @@ run:
 
 ```
 ./build.sh
-
 ```
 
 This will generate the pixmaps and appropriate aliases.
