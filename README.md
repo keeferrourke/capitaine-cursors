@@ -55,11 +55,11 @@ sudo dnf install la-capitaine-cursor-theme
 ```
 
 #### Arch Linux
-There is an [AUR PKGBUILD](https://aur.archlinux.org/packages/capitaine-cursors/)
-maintained by caiye:
+
+Now the package hs been moved to the official repository
 
 ```
-yaourt -S capitaine-cursors
+pacman -S capitaine-cursors
 ```
 
 #### Ubuntu 
