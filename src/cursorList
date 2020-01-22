@@ -44,7 +44,9 @@ ll_angle bottom_left_corner
 lr_angle bottom_right_corner
 move dnd-move
 n-resize size_ver
+ne-resize top_right_corner
 nesw-resize size_bdiag
+nw-resize top_left_corner
 nwse-resize size_fdiag
 plus cell
 pointing_hand pointer
@@ -53,9 +55,11 @@ right_side right-arrow
 s-resize size_ver
 sb_h_double_arrow size_hor
 sb_v_double_arrow size_ver
+se-resize bottom_right_corner
 size_all fleur
 split_h col-resize
 split_v row-resize
+sw-resize bottom_left_corner
 ul_angle top_left_corner
 ur_angle top_right_corner
 v_double_arrow size_ver
