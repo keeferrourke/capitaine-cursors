@@ -35,6 +35,7 @@ To install the cursor theme simply copy the compiled theme to your icons
 directory. For local user installation:
 
 ```
+mkdir -p ~/.icons/capitaine-cursors
 cp -pr dist/ ~/.icons/capitaine-cursors
 ```
 
