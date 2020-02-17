@@ -6,11 +6,46 @@
 SRC=$PWD/src
 DIST=$PWD/dist
 VARIANTS=('dark' 'light')
+PLATFORMS=('unix' 'win32')
 BUILD_DIR=$PWD/_build
 SPECS="$SRC/config"
 ALIASES="$SRC/cursor-aliases"
 SIZES=('1' '1.5' '2' '2.5' '3' '4' '5' '6')
+DPIS=('lo' 'tv' 'hd' 'xhd' 'xxhd' 'xxxhd')
 SVG_DIM=24
+
+# Truncates $SIZES based on the specified max DPI.
+# See https://en.wikipedia.org/wiki/Pixel_density#Named_pixel_densities
+#
+# Args:
+#   $1 = lo, tv, hd, xhd, xxhd, xxxhd
+function set_sizes {
+  max_size="$1"
+  case $max_size in
+    lo)
+      SIZES=("${SIZES[@]:0:3}")
+      ;;
+    tv)
+      SIZES=("${SIZES[@]:0:4}")
+      ;;
+    hd)
+      SIZES=("${SIZES[@]:0:5}")
+      ;;
+    xhd)
+      SIZES=("${SIZES[@]:0:6}")
+      ;;
+    xxhd)
+      SIZES=("${SIZES[@]:0:7}")
+      ;;
+    xxxhd)
+      SIZES=("${SIZES[@]:0:8}")
+      ;;
+    *)
+      return 1
+      ;;
+  esac
+  echo "${SIZES[@]}"
+}
 
 # Scales cursor specs to create an xcursor.in file for each cursor spec.
 # The xcursor.in file line-format is as follows:
@@ -40,7 +75,6 @@ function generate_in {
       echo "$dim $xhot $yhot x$size/$cur_name.png" | tee -a "$target"
     done
   done
-  return 1
   # Generate .in files for animated cursors.
   for spec in "$SPECS"/animated/*.spec; do
     IFS=" " read -r xhot_spec yhot_spec frames delay < "$spec"
@@ -59,9 +93,6 @@ function generate_in {
     done
   done
 }
-
-generate_in
-exit 0
 
 # Renders the source SVGs to PNGs in the $BUILD_DIR.
 #
@@ -131,11 +162,78 @@ function assemble {
   fi
 }
 
-# TODO: Accept variant arg from commandline.
-variant=dark
-for size in "${SIZES[@]}"; do
-  render "$size" "$variant"
+function show_usage {
+  echo -e "This script builds the capitaine-cursor theme.\n"
+  echo -e "Usage: ./build.sh [ -d DPI ] [ -t VARIANT ] [ -p PLATFORM ]"
+  echo -e "  -h, --help\t\tPrint this help"
+  echo -e "  -d, --max-dpi\t\tSet the max DPI to render. Higher values take longer."
+  echo -e                "\t\t\tOne of (" "${DPIS[@]}" ")."
+  echo -e "  -t, --type\t\tSpecify the build variant. One of (" "${VARIANTS[@]}" ")."
+  echo -e "  -p, --platform\tSpecify the build platform. One of (" "${PLATFORMS[@]}" ")."
+  echo
+}
+
+function validate_option {
+  valid=0
+  case "$1" in 
+    variant)
+      for variant in "${VARIANTS[@]}"; do
+        if [[ "$1" == "$variant" ]]; then valid=1; fi
+      done
+    ;;
+    *) return 1 ;;
+  esac
+  test "$valid" -eq 1
+  return $?
+}
+
+# Parse options to script.
+POSITIONAL_ARGS=()
+VARIANT="${VARIANTS[0]}"    # Default = dark
+PLATFORM="${PLATFORMS[0]}"  # Default = unix
+MAX_DPI=${DPIS[0]}          # Default = lo
+while [[ $# -gt 0 ]]; do
+  opt="$1"
+  case $opt in
+    -h|--help)
+      show_usage
+      exit 0
+      ;;
+    -d|--max-dpi)
+      MAX_DPI="$2"
+      shift; shift; # Shift past option and value.
+      ;;
+    -t|--type)
+      VARIANT="$2"
+      validate_option 'variant', "$VARIANT" || { show_usage; exit 2; }
+      shift ; shift; # Shift past option and value.
+      ;;
+    -p|--platform)
+      PLATFORM="$2"
+      validate_option 'platform', "$PLATFORM" || { show_usage; exit 2; }
+      shift; shift; # Shift past option and value.
+      ;;
+    -*=*)
+      echo "Unrecognized argument, use --opt value instead of --opt=value"
+      exit 2
+      ;;
+    *)
+      POSITIONAL_ARGS+=("$1")
+      shift # Shift past the value.
+      ;;
+  esac
 done
-assemble "$variant"
+# Restore positional arguments.
+set -- "${POSITIONAL_ARGS[@]}"
+
+# Begin the build.
+set_sizes "$MAX_DPI" || { echo "Unrecognized DPI."; exit 1; }
+generate_in
+exit 0
+
+for size in "${SIZES[@]}"; do
+  render "$size" "$VARIANT"
+done
+assemble "$VARIANT"
 
 exit 0
