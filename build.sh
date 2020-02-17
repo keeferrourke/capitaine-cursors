@@ -178,10 +178,18 @@ function validate_option {
   case "$1" in 
     variant)
       for variant in "${VARIANTS[@]}"; do
-        if [[ "$1" == "$variant" ]]; then valid=1; fi
+        if [[ "$2" == "$variant" ]]; then valid=1; fi
       done
-    ;;
-    *) return 1 ;;
+      ;;
+    platform)
+      for platform in "${PLATFORMS[@]}"; do
+        if [[ "$2" == "$platform" ]]; then valid=1; fi
+      done
+      ;;
+    *) 
+      echo $1 $2
+      return 1 
+      ;;
   esac
   test "$valid" -eq 1
   return $?
@@ -205,12 +213,12 @@ while [[ $# -gt 0 ]]; do
       ;;
     -t|--type)
       VARIANT="$2"
-      validate_option 'variant', "$VARIANT" || { show_usage; exit 2; }
+      validate_option 'variant' "$VARIANT" || { show_usage; exit 2; }
       shift ; shift; # Shift past option and value.
       ;;
     -p|--platform)
       PLATFORM="$2"
-      validate_option 'platform', "$PLATFORM" || { show_usage; exit 2; }
+      validate_option 'platform' "$PLATFORM" || { show_usage; exit 2; }
       shift; shift; # Shift past option and value.
       ;;
     -*=*)
