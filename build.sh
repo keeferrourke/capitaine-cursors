@@ -13,6 +13,7 @@ ALIASES="$SRC/cursor-aliases"
 SIZES=('1' '1.5' '2' '2.5' '3' '4' '5' '6')
 DPIS=('lo' 'tv' 'hd' 'xhd' 'xxhd' 'xxxhd')
 SVG_DIM=24
+SVG_DPI=96
 
 # Truncates $SIZES based on the specified max DPI.
 # See https://en.wikipedia.org/wiki/Pixel_density#Named_pixel_densities
@@ -44,7 +45,6 @@ function set_sizes {
       return 1
       ;;
   esac
-  echo "${SIZES[@]}"
 }
 
 # Scales cursor specs to create an xcursor.in file for each cursor spec.
@@ -104,10 +104,11 @@ function render {
   name="x$1"
   variant="$2"
   size=$(echo "$SVG_DIM*$1" | bc)
+  dpi=$(echo "$SVG_DPI*$1" | bc)
 
   mkdir -p "$BUILD_DIR/$variant/$name"
   find "$SRC/svg/$variant" -name "*.svg" -type f \
-      -exec sh -c 'inkscape -z -e "$1/$2/$3/$(basename ${0%.svg}).png" -w $4 -h $4 $0' {} "$BUILD_DIR" "$variant" "$name" "$size" \;
+      -exec sh -c 'inkscape -z -e "$1/$2/$3/$(basename ${0%.svg}).png" -w $4 -h $4 -d $5 $0' {} "$BUILD_DIR" "$variant" "$name" "$size" "$dpi" \;
 }
 
 # Assembles rendered PNGs into a cursor distribution.
@@ -132,12 +133,9 @@ function assemble {
   mkdir -p "$BASE_DIR"
   mkdir -p "$OUTPUT_DIR"
 
-  # Generate the *.in files from the specs in the sources.
-  generate_in
-
   # Move the in files and target variant to the root of the build directory
   # so that xcursorgen can find everything it needs.
-  cp -r "$BUILD_DIR/$variant" "$BUILD_DIR"
+  cp -r "$BUILD_DIR/$variant"/* "$BUILD_DIR"
   pushd "$BUILD_DIR" || return 1
   for cur_cfg in *.in; do
     cur_name="$(basename "${cur_cfg%.*}")"
@@ -237,7 +235,6 @@ set -- "${POSITIONAL_ARGS[@]}"
 # Begin the build.
 set_sizes "$MAX_DPI" || { echo "Unrecognized DPI."; exit 1; }
 generate_in
-exit 0
 
 for size in "${SIZES[@]}"; do
   render "$size" "$VARIANT"
