@@ -20,20 +20,21 @@ SVG_DPI=96
 #
 # Args:
 #   $1 = lo, tv, hd, xhd, xxhd, xxxhd
+#
 function set_sizes {
   max_size="$1"
   case $max_size in
     lo)
-      SIZES=("${SIZES[@]:0:3}")
+      SIZES=("${SIZES[@]:0:2}")
       ;;
     tv)
-      SIZES=("${SIZES[@]:0:4}")
+      SIZES=("${SIZES[@]:0:3}")
       ;;
     hd)
-      SIZES=("${SIZES[@]:0:5}")
+      SIZES=("${SIZES[@]:0:4}")
       ;;
     xhd)
-      SIZES=("${SIZES[@]:0:6}")
+      SIZES=("${SIZES[@]:0:5}")
       ;;
     xxhd)
       SIZES=("${SIZES[@]:0:7}")
@@ -197,7 +198,7 @@ function validate_option {
 POSITIONAL_ARGS=()
 VARIANT="${VARIANTS[0]}"    # Default = dark
 PLATFORM="${PLATFORMS[0]}"  # Default = unix
-MAX_DPI=${DPIS[0]}          # Default = lo
+MAX_DPI=${DPIS[1]}          # Default = tv
 while [[ $# -gt 0 ]]; do
   opt="$1"
   case $opt in

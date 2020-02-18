@@ -1,68 +1,79 @@
 # Capitaine cursors
 
 This is an x-cursor theme inspired by macOS and based on KDE Breeze.
-The source files were made in Inkscape, and the theme was designed to
-pair well with my icon pack,
-[La Capitaine](https://github.com/keeferrourke/la-capitaine-icon-theme).
+The source files were made in Inkscape, and the theme was designed to pair well with my icon pack, [La Capitaine][la-capitaine-icons].
+
+[la-capitaine-icons]: https://github.com/keeferrourke/la-capitaine-icon-theme
 
 This cursor should scale appropriately for any display resolution.
-Rendered at 96dpi, 144dpi, 192dpi, 240dpi, 288dpi, 384dpi, 480dpi, and
-576dpi, Capitaine cursors sufficiently covers all named pixel densities 
-as of early 2020.
+
+## Supported DPIs
+
+This cursor pack aims to support all [named pixel densities][named-dpi].
+
+[named-dpi]: https://en.wikipedia.org/wiki/Pixel_density#Named_pixel_densities
+
+| Name    | Build option name | Rendered density (DPI) | Scale    |
+| :------ | :---------------- | :--------------------- | :------- |
+| LODPI   | `-d lo`           | 96-144                 | x1, x1.5 |
+| TVDPI   | `-d tv` (default) | 192                    | x2       |
+| HDPI    | `-d hd`           | 240                    | x2.5     |
+| XHDPI   | `-d xhd`          | 288                    | x3       |
+| XXHDPI  | `-d xxhd`         | 384-480                | x4, x5   |
+| XXXHDPI | `-d xxxhd`        | 576                    | x6       |
+
+## Building from source
+
+Building from source can take a really long time, depending on the max specified DPI. 
+Pre-built packages are available for download.
+
+That said, you'll find everything you need to build and modify this cursor set in the `src/` directory.
+
+Just make sure `inkscape` and `xcursorgen` are installed, and run the provided script:
+
+```
+./build.sh
+```
+
+This will generate the pixmaps and appropriate aliases.
+The freshly compiled cursor theme will be located in the `dist/` folder.
+
+The script has a few options described below:
+
+| Option | Values          | Description                     |
+| :----- | :-------------- | :------------------------------ |
+| `-p`   | `unix`, `win32` | Build for BSD/Linux, or Windows |
+| `-t`   | `dark`, `light` | Choose the variant to build     |
+| `-d`   | See DPIs        | Set the max DPI to render       |
 
 ## Pre-built binaries
 
-### GNU/Linux
-
-Everything you need to build the xcursor theme is found in `src/`, and
-the prebuilt theme for GNU/Linux desktops is found in `dist/`.
-
-### Windows
-
-I have also provided a Windows cursor theme available in `.windows/`,
-though it is not buildable from source due to the broken nature of
-Microsoft's operating system. Microsoft cursors must be made using a
-proprietary GUI editor from PNG sources, which is **bad**. For this
-reason, the Windows version of Capitaine cursors will not receive
-substantial updates.
-
-## Notes
-
-Building the x-cursor theme from SVG source requires a regular inkscape
-installation. It also needs a command called `xcursorgen`. If the build
-script fails, you should probably install inkscape and xcursorgen using
-your preferred package manager :)
-
-## License
-
-Capitaine cursors is based on KDE Breeze cursors, as such it falls under
-the same license.
-
-Capitaine cursors is LGPLv3. See COPYING for more details.
+Pre-built binaries are available for download at
+[pling.com](https://www.pling.com/p/1148692) :heart:
 
 ## Installation
 
 ### \*NIXes, \*BSDs, and possibly others
 
-To install the cursor theme simply copy the compiled theme to your icons
-directory. For local user installation:
+To install the cursor theme simply copy the theme to your icons directory.
+For local user installation:
 
 ```
 mkdir -p ~/.icons/capitaine-cursors
-cp -pr dist/ ~/.icons/capitaine-cursors
+cp -pr path/to/theme/ ~/.icons/capitaine-cursors
 ```
 
 For system-wide installation for all users:
 
 ```
-sudo cp -pr dist/ /usr/share/icons/capitaine-cursors
+sudo cp -pr path/to/theme/ /usr/share/icons/capitaine-cursors
 ```
 
 Then set the theme with your preferred desktop tools.
 
 #### Fedora and EPEL
 
-There is a third party Copr repository with ready-to-use RPMs:
+There is a third-party Copr repository with ready-to-use RPMs:
 
 ```
 sudo dnf copr enable tcg/themes
@@ -71,7 +82,7 @@ sudo dnf install la-capitaine-cursor-theme
 
 #### Arch Linux
 
-Now the package hs been moved to the official repository
+Capitaine cursors are available in the official Arch Linux repositories.
 
 ```
 pacman -S capitaine-cursors
@@ -80,6 +91,7 @@ pacman -S capitaine-cursors
 ### Windows
 
 The Windows build comes with an INF file to make installation easy.
+
  1. Open `.windows/` in Explorer, and right click on `install.inf`.
  2. Click 'Install' from the context menu, and authorise the
     modifications to your system.
@@ -87,24 +99,18 @@ The Windows build comes with an INF file to make installation easy.
     `Change mouse pointers`, and select Capitaine cursors.
  4. Click 'Apply'.
 
-## Building from source
+## License
 
-You'll find everything you need to build and modify this cursor set in
-the `src/` directory. To build the xcursor theme from the SVG source
-run:
+Capitaine cursors is based on KDE Breeze cursors, as such it falls under the same license.
 
-```
-./build.sh
-```
-
-This will generate the pixmaps and appropriate aliases.
-The freshly compiled cursor theme will be located in `dist/`
+Capitaine cursors is LGPLv3. See COPYING for more details.
 
 ## Donations
-I'm a poor computer science student &ndash; and I spend many hours per
-week working on software and artwork for the community. If you like this
-cursor theme and want to support (buy me a coffee?), please consider
-[donating](https://paypal.me/keeferrourke).
+
+If you like this cursor theme and want to support me, please consider [donating](https://paypal.me/keeferrourke). 
 
 ## Preview
-![](preview.png)
+
+| Dark                  | Light                  |
+| --------------------- | ---------------------- |
+| ![](preview-dark.png) | ![](preview-light.png) |
