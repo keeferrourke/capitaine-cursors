@@ -137,14 +137,14 @@ function assemble {
   # Move the in files and target variant to the root of the build directory
   # so that xcursorgen can find everything it needs.
   cp -r "$BUILD_DIR/$variant"/* "$BUILD_DIR"
-  pushd "$BUILD_DIR" || return 1
+  pushd "$BUILD_DIR" > /dev/null || return 1
   for cur_cfg in *.in; do
     cur_name="$(basename "${cur_cfg%.*}")"
     xcursorgen "$cur_cfg" "$OUTPUT_DIR/$cur_name"
   done
-  popd || return 1
+  popd > /dev/null || return 1
 
-  pushd "$OUTPUT_DIR" || return 1
+  pushd "$OUTPUT_DIR" > /dev/null || return 1
   while read -r cur_alias; do
     from="${cur_alias#* }"
     to="${cur_alias% *}"
@@ -153,7 +153,7 @@ function assemble {
 
     ln -sr "$from" "$to"
   done < "$ALIASES"
-  popd || return 1
+  popd > /dev/null || return 1
 
   if [ ! -e "$INDEX_FILE" ]; then
     touch "$INDEX_FILE"
@@ -185,10 +185,7 @@ function validate_option {
         if [[ "$2" == "$platform" ]]; then valid=1; fi
       done
       ;;
-    *) 
-      echo $1 $2
-      return 1 
-      ;;
+    *) return 1 ;;
   esac
   test "$valid" -eq 1
   return $?
