@@ -157,7 +157,7 @@ function assemble {
 
   if [ ! -e "$INDEX_FILE" ]; then
     touch "$INDEX_FILE"
-    echo -e "[Icon Theme]\nName=$THEME\n" > "$INDEX_FILE"
+    echo -e "[Icon Theme]\nName=$THEME_NAME\nComment=A stylish cursor for humans" > "$INDEX_FILE"
   fi
 }
 
