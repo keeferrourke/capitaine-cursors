@@ -46,10 +46,11 @@ The script has a few options described below:
 | `-t`   | `dark`, `light` | Choose the variant to build     |
 | `-d`   | See DPIs        | Set the max DPI to render       |
 
+<small>*Note: building the win32 cursors from source is not currently supported, but it is on the roadmap.</small>
+
 ## Pre-built binaries
 
-Pre-built binaries are available for download at
-[pling.com](https://www.pling.com/p/1148692) :heart:
+Pre-built binaries are available for download at [pling.com](https://www.pling.com/p/1148692) :heart:
 
 ## Installation
 
@@ -93,10 +94,8 @@ pacman -S capitaine-cursors
 The Windows build comes with an INF file to make installation easy.
 
  1. Open `.windows/` in Explorer, and right click on `install.inf`.
- 2. Click 'Install' from the context menu, and authorise the
-    modifications to your system.
- 3. Open `Control Panel` > `Personalisation and Appearance` >
-    `Change mouse pointers`, and select Capitaine cursors.
+ 2. Click 'Install' from the context menu, and authorise the modifications to your system.
+ 3. Open `Control Panel` > `Personalisation and Appearance` > `Change mouse pointers`, and select Capitaine cursors.
  4. Click 'Apply'.
 
 ## License
