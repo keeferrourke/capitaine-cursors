@@ -13,14 +13,14 @@ This cursor pack aims to support all [named pixel densities][named-dpi].
 
 [named-dpi]: https://en.wikipedia.org/wiki/Pixel_density#Named_pixel_densities
 
-| Name    | Build option name | Rendered density (DPI) | Scale    |
-| :------ | :---------------- | :--------------------- | :------- |
-| LODPI   | `-d lo`           | 96-144                 | x1, x1.5 |
-| TVDPI   | `-d tv` (default) | 192                    | x2       |
-| HDPI    | `-d hd`           | 240                    | x2.5     |
-| XHDPI   | `-d xhd`          | 288                    | x3       |
-| XXHDPI  | `-d xxhd`         | 384-480                | x4, x5   |
-| XXXHDPI | `-d xxxhd`        | 576                    | x6       |
+| Name    | Build option name | Rendered density (DPI) | Scale          |
+| :------ | :---------------- | :--------------------- | :------------- |
+| LODPI   | `-d lo`           | 96-144                 | x1, 1.25, x1.5 |
+| TVDPI   | `-d tv` (default) | 192                    | x2             |
+| HDPI    | `-d hd`           | 240                    | x2.5           |
+| XHDPI   | `-d xhd`          | 288                    | x3             |
+| XXHDPI  | `-d xxhd`         | 384-480                | x4, x5         |
+| XXXHDPI | `-d xxxhd`        | 576                    | x6, x10        |
 
 ## Building from source
 
@@ -29,7 +29,15 @@ Pre-built packages are available for download.
 
 That said, you'll find everything you need to build and modify this cursor set in the `src/` directory.
 
-Just make sure `inkscape` and `xcursorgen` are installed, and run the provided script:
+Make sure `inkscape` and `xcursorgen` are installed
+
+```
+sudo apt install inkscape x11-apps          # Debian, Ubuntu based distros
+sudo dnf install inkscape xorg-x11-apps     # Fedora, EPEL based distros
+brew cask install xquartz inkscape          # macOS
+```
+
+Then run the provided script:
 
 ```
 ./build.sh
