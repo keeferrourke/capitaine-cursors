@@ -13,14 +13,14 @@ This cursor pack aims to support all [named pixel densities][named-dpi].
 
 [named-dpi]: https://en.wikipedia.org/wiki/Pixel_density#Named_pixel_densities
 
-| Name    | Build option name | Rendered density (DPI) | Scale    |
-| :------ | :---------------- | :--------------------- | :------- |
-| LODPI   | `-d lo`           | 96-144                 | x1, x1.5 |
-| TVDPI   | `-d tv` (default) | 192                    | x2       |
-| HDPI    | `-d hd`           | 240                    | x2.5     |
-| XHDPI   | `-d xhd`          | 288                    | x3       |
-| XXHDPI  | `-d xxhd`         | 384-480                | x4, x5   |
-| XXXHDPI | `-d xxxhd`        | 576                    | x6       |
+| Name    | Build option name | Rendered density (DPI) | Scale          |
+| :------ | :---------------- | :--------------------- | :------------- |
+| LODPI   | `-d lo`           | 96-144                 | x1, 1.25, x1.5 |
+| TVDPI   | `-d tv` (default) | 192                    | x2             |
+| HDPI    | `-d hd`           | 240                    | x2.5           |
+| XHDPI   | `-d xhd`          | 288                    | x3             |
+| XXHDPI  | `-d xxhd`         | 384-480                | x4, x5         |
+| XXXHDPI | `-d xxxhd`        | 576                    | x6, x10        |
 
 ## Building from source
 

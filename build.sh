@@ -10,7 +10,7 @@ PLATFORMS=('unix' 'win32')
 BUILD_DIR=$PWD/_build
 SPECS="$SRC/config"
 ALIASES="$SRC/cursor-aliases"
-SIZES=('1' '1.5' '2' '2.5' '3' '4' '5' '6' '10')
+SIZES=('1' '1.25' '1.5' '2' '2.5' '3' '4' '5' '6' '10')
 DPIS=('lo' 'tv' 'hd' 'xhd' 'xxhd' 'xxxhd')
 SVG_DIM=24
 SVG_DPI=96
@@ -25,16 +25,16 @@ function set_sizes {
   max_size="$1"
   case $max_size in
     lo)
-      SIZES=("${SIZES[@]:0:2}")
-      ;;
-    tv)
       SIZES=("${SIZES[@]:0:3}")
       ;;
-    hd)
+    tv)
       SIZES=("${SIZES[@]:0:4}")
       ;;
-    xhd)
+    hd)
       SIZES=("${SIZES[@]:0:5}")
+      ;;
+    xhd)
+      SIZES=("${SIZES[@]:0:6}")
       ;;
     xxhd)
       SIZES=("${SIZES[@]:0:7}")
@@ -106,7 +106,7 @@ function render {
   variant="$2"
   size=$(echo "$SVG_DIM*$1" | bc)
   dpi=$(echo "$SVG_DPI*$1" | bc)
-  
+
   size=${size%.*} dpi=${size%.*} # Strip decimal parts if any.
 
   OUTPUT_DIR="$BUILD_DIR/$variant/$name"
