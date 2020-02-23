@@ -105,12 +105,11 @@ function render {
   name="x$1"
   variant="$2"
   size=$(echo "$SVG_DIM*$1" | bc)
-  size=${size%.*}
   dpi=$(echo "$SVG_DPI*$1" | bc)
-  dpi=${size%.*}
+  
+  size=${size%.*} dpi=${size%.*} # Strip decimal parts if any.
 
   OUTPUT_DIR="$BUILD_DIR/$variant/$name"
-
   mkdir -p "$OUTPUT_DIR"
 
   # Set options for Inkscape depending on version.
