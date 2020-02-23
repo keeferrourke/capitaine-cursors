@@ -29,7 +29,15 @@ Pre-built packages are available for download.
 
 That said, you'll find everything you need to build and modify this cursor set in the `src/` directory.
 
-Just make sure `inkscape` and `xcursorgen` are installed, and run the provided script:
+Make sure `inkscape` and `xcursorgen` are installed
+
+```
+sudo apt install inkscape x11-apps          # Debian, Ubuntu based distros
+sudo dnf install inkscape xorg-x11-apps     # Fedora, EPEL based distros
+brew cask install xquartz inkscape          # macOS
+```
+
+Then run the provided script:
 
 ```
 ./build.sh

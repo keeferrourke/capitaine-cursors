@@ -10,7 +10,7 @@ PLATFORMS=('unix' 'win32')
 BUILD_DIR=$PWD/_build
 SPECS="$SRC/config"
 ALIASES="$SRC/cursor-aliases"
-SIZES=('1' '1.5' '2' '2.5' '3' '4' '5' '6')
+SIZES=('1' '1.5' '2' '2.5' '3' '4' '5' '6' '10')
 DPIS=('lo' 'tv' 'hd' 'xhd' 'xxhd' 'xxxhd')
 SVG_DIM=24
 SVG_DPI=96
@@ -40,7 +40,7 @@ function set_sizes {
       SIZES=("${SIZES[@]:0:7}")
       ;;
     xxxhd)
-      SIZES=("${SIZES[@]:0:8}")
+      SIZES=("${SIZES[@]}")
       ;;
     *)
       return 1
@@ -107,9 +107,20 @@ function render {
   size=$(echo "$SVG_DIM*$1" | bc)
   dpi=$(echo "$SVG_DPI*$1" | bc)
 
-  mkdir -p "$BUILD_DIR/$variant/$name"
-  find "$SRC/svg/$variant" -name "*.svg" -type f \
-      -exec sh -c 'inkscape -z -e "$1/$2/$3/$(basename ${0%.svg}).png" -w $4 -h $4 -d $5 $0' {} "$BUILD_DIR" "$variant" "$name" "$size" "$dpi" \;
+  OUTPUT_DIR="$BUILD_DIR/$variant/$name"
+
+  mkdir -p "$OUTPUT_DIR"
+
+# Set options for Inkscape depending on version.
+INKSCAPE_OPTS=('-z' '-w' "$size" -h "$size" -d "$dpi" )
+case $(inkscape -V | cut -d' ' -f2) in
+  0.*) INKSCAPE_OPTS+=('--export-png');;
+  1.*) INKSCAPE_OPTS+=('--export-file');;
+esac
+
+for svg_file in "$SRC/svg/$variant"/*.svg; do
+  inkscape "${INKSCAPE_OPTS[@]}" "$OUTPUT_DIR/$(basename "${svg_file%.svg}").png" "$svg_file"
+done
 }
 
 # Assembles rendered PNGs into a cursor distribution.
@@ -151,14 +162,18 @@ function assemble {
 
     if [ -e "$to" ]; then continue; fi
 
-    ln -sr "$from" "$to"
+    ln -s "$from" "$to"
   done < "$ALIASES"
   popd > /dev/null || return 1
 
+  # Write the index.theme file.
   if [ ! -e "$INDEX_FILE" ]; then
     touch "$INDEX_FILE"
     echo -e "[Icon Theme]\nName=$THEME_NAME\nComment=A stylish cursor for humans" > "$INDEX_FILE"
   fi
+
+  # Copy a thumbnail.png to serve as a preview in some environments.
+  cp "$SRC/thumbnail-$variant.png" "$OUTPUT_DIR/thumbnail.png"
 }
 
 function show_usage {
@@ -190,6 +205,15 @@ function validate_option {
   test "$valid" -eq 1
   return $?
 }
+
+# Check dependencies are present.
+DEPENDENCIES=(inkscape xcursorgen)
+for dep in "${DEPENDENCIES[@]}"; do
+  if ! command -v "$dep" >/dev/null; then
+    echo "$dep is not installed, exiting."
+    exit 1
+  fi
+done
 
 # Parse options to script.
 POSITIONAL_ARGS=()
