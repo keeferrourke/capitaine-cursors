@@ -112,9 +112,9 @@ function render {
   mkdir -p "$OUTPUT_DIR"
 
 # Set options for Inkscape depending on version.
-INKSCAPE_OPTS=('-z' '-w' "$size" -h "$size" -d "$dpi" )
+INKSCAPE_OPTS=('-w' "$size" -h "$size" -d "$dpi" )
 case $(inkscape -V | cut -d' ' -f2) in
-  0.*) INKSCAPE_OPTS+=('--export-png');;
+  0.*) INKSCAPE_OPTS+=('-z' '--export-png');;
   1.*) INKSCAPE_OPTS+=('--export-file');;
 esac
 
