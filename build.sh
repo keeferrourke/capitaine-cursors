@@ -107,22 +107,23 @@ function render {
   size=$(echo "$SVG_DIM*$1" | bc)
   size=${size%.*}
   dpi=$(echo "$SVG_DPI*$1" | bc)
+  dpi=${size%.*}
 
   OUTPUT_DIR="$BUILD_DIR/$variant/$name"
 
   mkdir -p "$OUTPUT_DIR"
 
-# Set options for Inkscape depending on version.
-INKSCAPE_OPTS=('-w' "$size" -h "$size" -d "$dpi" )
-case $(inkscape -V | cut -d' ' -f2) in
-  # NB: The export option (-e or -o) must be the last option in the INKSCAPE_OPTS array.
-  0.*) INKSCAPE_OPTS+=('-z' '-e');; # -z specifies not to launch GUI, -e is export
-  1.*) INKSCAPE_OPTS+=('-o');;      # v1.0+ uses no GUI by default, -e replaced by -o
-esac
+  # Set options for Inkscape depending on version.
+  INKSCAPE_OPTS=('-w' "$size" -h "$size" -d "$dpi" )
+  case $(inkscape -V | cut -d' ' -f2) in
+    # NB: The export option (-e or -o) must be the last option in the INKSCAPE_OPTS array.
+    0.*) INKSCAPE_OPTS+=('-z' '-e');; # -z specifies not to launch GUI, -e is export
+    1.*) INKSCAPE_OPTS+=('-o');;      # v1.0+ uses no GUI by default, -e replaced by -o
+  esac
 
-for svg_file in "$SRC/svg/$variant"/*.svg; do
-  inkscape "${INKSCAPE_OPTS[@]}" "$OUTPUT_DIR/$(basename "${svg_file%.svg}").png" "$svg_file"
-done
+  for svg_file in "$SRC/svg/$variant"/*.svg; do
+   inkscape "${INKSCAPE_OPTS[@]}" "$OUTPUT_DIR/$(basename "${svg_file%.svg}").png" "$svg_file"
+  done
 }
 
 # Assembles rendered PNGs into a cursor distribution.
