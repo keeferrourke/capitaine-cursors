@@ -114,8 +114,9 @@ function render {
 # Set options for Inkscape depending on version.
 INKSCAPE_OPTS=('-w' "$size" -h "$size" -d "$dpi" )
 case $(inkscape -V | cut -d' ' -f2) in
-  0.*) INKSCAPE_OPTS+=('-z' '--export-png');;
-  1.*) INKSCAPE_OPTS+=('--export-file');;
+  # NB: The export option (-e or -o) must the last option in the INKSCAPE_OPTS array.
+  0.*) INKSCAPE_OPTS+=('-z' '-e');; # -z Specifies not to launch GUI, -e is export
+  1.*) INKSCAPE_OPTS+=('-o');;      # Uses no GUI by default, -e replaced by -o
 esac
 
 for svg_file in "$SRC/svg/$variant"/*.svg; do
