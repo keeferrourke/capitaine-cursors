@@ -105,6 +105,7 @@ function render {
   name="x$1"
   variant="$2"
   size=$(echo "$SVG_DIM*$1" | bc)
+  size=${size%.*}
   dpi=$(echo "$SVG_DPI*$1" | bc)
 
   OUTPUT_DIR="$BUILD_DIR/$variant/$name"
@@ -114,9 +115,9 @@ function render {
 # Set options for Inkscape depending on version.
 INKSCAPE_OPTS=('-w' "$size" -h "$size" -d "$dpi" )
 case $(inkscape -V | cut -d' ' -f2) in
-  # NB: The export option (-e or -o) must the last option in the INKSCAPE_OPTS array.
-  0.*) INKSCAPE_OPTS+=('-z' '-e');; # -z Specifies not to launch GUI, -e is export
-  1.*) INKSCAPE_OPTS+=('-o');;      # Uses no GUI by default, -e replaced by -o
+  # NB: The export option (-e or -o) must be the last option in the INKSCAPE_OPTS array.
+  0.*) INKSCAPE_OPTS+=('-z' '-e');; # -z specifies not to launch GUI, -e is export
+  1.*) INKSCAPE_OPTS+=('-o');;      # v1.0+ uses no GUI by default, -e replaced by -o
 esac
 
 for svg_file in "$SRC/svg/$variant"/*.svg; do
