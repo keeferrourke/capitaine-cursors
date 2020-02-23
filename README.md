@@ -20,7 +20,7 @@ This cursor pack aims to support all [named pixel densities][named-dpi].
 | HDPI    | `-d hd`           | 240                    | x2.5           |
 | XHDPI   | `-d xhd`          | 288                    | x3             |
 | XXHDPI  | `-d xxhd`         | 384-480                | x4, x5         |
-| XXXHDPI | `-d xxxhd`        | 576                    | x6, x10        |
+| XXXHDPI | `-d xxxhd`        | 576+                   | x6, x10        |
 
 ## Building from source
 
