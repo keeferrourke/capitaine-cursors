@@ -56,6 +56,14 @@ The script has a few options described below:
 
 <small>*Note: building the win32 cursors from source is not currently supported, but it is on the roadmap.</small>
 
+### Using docker
+
+You can build cursors inside docker, if you don't have or don't want to install dependencies. Only thing you need to have is docker.
+
+```
+./build-docker.sh
+```
+
 ## Pre-built binaries
 
 Pre-built binaries are available for download at [pling.com](https://www.pling.com/p/1148692) :heart:
