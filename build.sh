@@ -68,7 +68,7 @@ function generate_in {
     cur_name="$(basename "${spec%.*}")"
     target="$BUILD_DIR/$cur_name.in"
     if [ -f "$target" ]; then rm "$target"; fi
-    for size in "${SIZES[@]}"; do 
+    for size in "${SIZES[@]}"; do
       dim=$(echo "$SVG_DIM*$size" | bc)
       xhot=$(echo "$xhot_spec*$size" | bc)
       yhot=$(echo "$yhot_spec*$size" | bc)
@@ -191,7 +191,7 @@ function show_usage {
 
 function validate_option {
   valid=0
-  case "$1" in 
+  case "$1" in
     variant)
       for variant in "${VARIANTS[@]}"; do
         if [[ "$2" == "$variant" ]]; then valid=1; fi
@@ -209,7 +209,7 @@ function validate_option {
 }
 
 # Check dependencies are present.
-DEPENDENCIES=(inkscape xcursorgen)
+DEPENDENCIES=(inkscape xcursorgen bc)
 for dep in "${DEPENDENCIES[@]}"; do
   if ! command -v "$dep" >/dev/null; then
     echo "$dep is not installed, exiting."
