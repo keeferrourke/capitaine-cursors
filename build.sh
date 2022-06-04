@@ -7,6 +7,7 @@ SRC=$PWD/src
 DIST=$PWD/dist
 VARIANTS=('dark' 'light')
 PLATFORMS=('unix' 'win32')
+STYLES=('macOS' 'Nord')
 BUILD_DIR=$PWD/_build
 SPECS="$SRC/config"
 ALIASES="$SRC/cursor-aliases"
@@ -129,14 +130,16 @@ function render {
 #
 # Args:
 #  $1 = dark, light
+#  $2 = macOS, Nord
 #
 function assemble {
   variant="$1"
+  style="$2"
 
   BASE_DIR="$DIST/$variant"
   OUTPUT_DIR="$BASE_DIR/cursors"
   INDEX_FILE="$BASE_DIR/index.theme"
-  THEME_NAME="Capitaine Cursors"
+  THEME_NAME="Capitaine Cursors ($style)"
 
   case "$variant" in
     dark) THEME_NAME="$THEME_NAME" ;;
@@ -180,12 +183,13 @@ function assemble {
 
 function show_usage {
   echo -e "This script builds the capitaine-cursor theme.\n"
-  echo -e "Usage: ./build.sh [ -d DPI ] [ -t VARIANT ] [ -p PLATFORM ]"
+  echo -e "Usage: ./build.sh [ -d DPI ] [ -t VARIANT ] [ -p PLATFORM ] [ -s STYLE ]"
   echo -e "  -h, --help\t\tPrint this help"
   echo -e "  -d, --max-dpi\t\tSet the max DPI to render. Higher values take longer."
   echo -e                "\t\t\tOne of (" "${DPIS[@]}" ")."
   echo -e "  -t, --type\t\tSpecify the build variant. One of (" "${VARIANTS[@]}" ")."
   echo -e "  -p, --platform\tSpecify the build platform. One of (" "${PLATFORMS[@]}" ")."
+  echo -e "  -s, --style\t\tSpecify the build style. One of (" "${STYLES[@]}" ")."
   echo
 }
 
@@ -202,6 +206,11 @@ function validate_option {
         if [[ "$2" == "$platform" ]]; then valid=1; fi
       done
       ;;
+    style)
+      for style in "${STYLES[@]}"; do
+        if [[ "$2" == "$style" ]]; then valid=1; fi
+      done
+      ;;
     *) return 1 ;;
   esac
   test "$valid" -eq 1
@@ -209,7 +218,7 @@ function validate_option {
 }
 
 # Check dependencies are present.
-DEPENDENCIES=(inkscape xcursorgen bc)
+DEPENDENCIES=(inkscape xcursorgen bc sed)
 for dep in "${DEPENDENCIES[@]}"; do
   if ! command -v "$dep" >/dev/null; then
     echo "$dep is not installed, exiting."
@@ -221,6 +230,7 @@ done
 POSITIONAL_ARGS=()
 VARIANT="${VARIANTS[0]}"    # Default = dark
 PLATFORM="${PLATFORMS[0]}"  # Default = unix
+STYLE="${STYLES[0]}"        # Default = macOS
 MAX_DPI=${DPIS[1]}          # Default = tv
 while [[ $# -gt 0 ]]; do
   opt="$1"
@@ -243,6 +253,11 @@ while [[ $# -gt 0 ]]; do
       validate_option 'platform' "$PLATFORM" || { show_usage; exit 2; }
       shift; shift; # Shift past option and value.
       ;;
+    -s|--style)
+      STYLE="$2"
+      validate_option 'style' "$STYLE" || { show_usage; exit 2; }
+      shift; shift; # Shift past option and value.
+      ;;
     -*=*)
       echo "Unrecognized argument, use --opt value instead of --opt=value"
       exit 2
@@ -256,6 +271,33 @@ done
 # Restore positional arguments.
 set -- "${POSITIONAL_ARGS[@]}"
 
+# Patch the color palettes
+if [ "$STYLE" == "Nord" ]; then
+  sed -i \
+    -e 's/#fff/#dfe4ed/g' \
+    -e 's/#fefefe/#dfe4ed/g' \
+    -e 's/#1a1a1a/#353b49/g' \
+    -e 's/#18c087/#8fbcbb/g' \
+    -e 's/#f67400/#d08770/g' \
+    -e 's/#3daee9/#81a1c1/g' \
+    -e 's/#11d116/#8fbcbb/g' \
+    -e 's/#ed1515/#bf616a/g' \
+    -e 's/#ff645d/#bf616a/g' \
+    -e 's/#ff4332/#bf616a/g' \
+    -e 's/#fbb114/#d08770/g' \
+    -e 's/#ff9508/#d08770/g' \
+    -e 's/#ca70e1/#b48ead/g' \
+    -e 's/#b452cb/#b48ead/g' \
+    -e 's/#14adf6/#81a1c1/g' \
+    -e 's/#1191f4/#81a1c1/g' \
+    -e 's/#52cf30/#a3be8c/g' \
+    -e 's/#3bbd1c/#a3be8c/g' \
+    -e 's/#ffd305/#ebcb8b/g' \
+    -e 's/#fdcf01/#ebcb8b/g' \
+    -e 's/#959595/#616e88/g' \
+    src/svg/dark/*
+fi
+
 # Begin the build.
 set_sizes "$MAX_DPI" || { echo "Unrecognized DPI."; exit 1; }
 generate_in
@@ -263,6 +305,6 @@ generate_in
 for size in "${SIZES[@]}"; do
   render "$size" "$VARIANT"
 done
-assemble "$VARIANT"
+assemble "$VARIANT" "$STYLE"
 
 exit 0
