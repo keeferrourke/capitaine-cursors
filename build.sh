@@ -295,7 +295,7 @@ if [ "$STYLE" == "Nord" ]; then
     -e 's/#ffd305/#ebcb8b/g' \
     -e 's/#fdcf01/#ebcb8b/g' \
     -e 's/#959595/#616e88/g' \
-    src/svg/dark/*
+    src/svg/*/*
 fi
 
 # Begin the build.
