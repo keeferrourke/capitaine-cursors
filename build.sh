@@ -138,7 +138,7 @@ function assemble {
     style=" ($2)"
   fi
 
-  BASE_DIR="$DIST/$variant"
+  BASE_DIR="$DIST/$2/$variant"
   OUTPUT_DIR="$BASE_DIR/cursors"
   INDEX_FILE="$BASE_DIR/index.theme"
   THEME_NAME="Capitaine Cursors${style}"
