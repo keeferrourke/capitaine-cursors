@@ -7,7 +7,7 @@ SRC=$PWD/src
 DIST=$PWD/dist
 VARIANTS=('dark' 'light')
 PLATFORMS=('unix' 'win32')
-STYLES=('macOS' 'Nord')
+STYLES=('macOS' 'Nord' 'Gruvbox' 'Everforest')
 BUILD_DIR=$PWD/_build
 SPECS="$SRC/config"
 ALIASES="$SRC/cursor-aliases"
@@ -130,16 +130,18 @@ function render {
 #
 # Args:
 #  $1 = dark, light
-#  $2 = macOS, Nord
+#  $2 = macOS, Nord, Gruvbox, Everforest
 #
 function assemble {
   variant="$1"
-  style="$2"
+  if [ "$2" != "macOS" ]; then
+    style=" ($2)"
+  fi
 
   BASE_DIR="$DIST/$variant"
   OUTPUT_DIR="$BASE_DIR/cursors"
   INDEX_FILE="$BASE_DIR/index.theme"
-  THEME_NAME="Capitaine Cursors ($style)"
+  THEME_NAME="Capitaine Cursors${style}"
 
   case "$variant" in
     dark) THEME_NAME="$THEME_NAME" ;;
@@ -295,6 +297,54 @@ if [ "$STYLE" == "Nord" ]; then
     -e 's/#ffd305/#ebcb8b/g' \
     -e 's/#fdcf01/#ebcb8b/g' \
     -e 's/#959595/#616e88/g' \
+    src/svg/*/*
+elif [ "$STYLE" == "Gruvbox" ]; then
+  sed -i \
+    -e 's/#fff/#ebdbb2/g' \
+    -e 's/#fefefe/#ebdbb2/g' \
+    -e 's/#1a1a1a/#3c3836/g' \
+    -e 's/#18c087/#8ec07c/g' \
+    -e 's/#f67400/#fe8019/g' \
+    -e 's/#3daee9/#83a598/g' \
+    -e 's/#11d116/#b8bb26/g' \
+    -e 's/#ed1515/#fb4934/g' \
+    -e 's/#ff645d/#fb4934/g' \
+    -e 's/#ff4332/#fb4934/g' \
+    -e 's/#fbb114/#fe8019/g' \
+    -e 's/#ff9508/#fe8019/g' \
+    -e 's/#ca70e1/#d3869b/g' \
+    -e 's/#b452cb/#d3869b/g' \
+    -e 's/#14adf6/#83a598/g' \
+    -e 's/#1191f4/#83a598/g' \
+    -e 's/#52cf30/#b8bb26/g' \
+    -e 's/#3bbd1c/#b8bb26/g' \
+    -e 's/#ffd305/#fabd2f/g' \
+    -e 's/#fdcf01/#fabd2f/g' \
+    -e 's/#959595/#928374/g' \
+    src/svg/*/*
+elif [ "$STYLE" == "Everforest" ]; then
+  sed -i \
+    -e 's/#fff/#f8f0dc/g' \
+    -e 's/#fefefe/#f8f0dc/g' \
+    -e 's/#1a1a1a/#323d43/g' \
+    -e 's/#18c087/#83c092/g' \
+    -e 's/#f67400/#e69875/g' \
+    -e 's/#3daee9/#7fbbb3/g' \
+    -e 's/#11d116/#a7c080/g' \
+    -e 's/#ed1515/#e67e80/g' \
+    -e 's/#ff645d/#e67e80/g' \
+    -e 's/#ff4332/#e67e80/g' \
+    -e 's/#fbb114/#e69875/g' \
+    -e 's/#ff9508/#e69875/g' \
+    -e 's/#ca70e1/#d699b6/g' \
+    -e 's/#b452cb/#d699b6/g' \
+    -e 's/#14adf6/#7fbbb3/g' \
+    -e 's/#1191f4/#7fbbb3/g' \
+    -e 's/#52cf30/#a7c080/g' \
+    -e 's/#3bbd1c/#a7c080/g' \
+    -e 's/#ffd305/#dbbc7f/g' \
+    -e 's/#fdcf01/#dbbc7f/g' \
+    -e 's/#959595/#859289/g' \
     src/svg/*/*
 fi
 
