@@ -23,8 +23,8 @@ SVG_DPI=96
 #   $1 = lo, tv, hd, xhd, xxhd, xxxhd
 #
 function set_sizes {
-  max_size="$1"
-  case $max_size in
+  max_sizes="$1"
+  case $max_sizes in
     lo)
       SIZES=("${SIZES[@]:0:3}")
       ;;
@@ -42,6 +42,39 @@ function set_sizes {
       ;;
     xxxhd)
       SIZES=("${SIZES[@]}")
+      ;;
+    *)
+      return 1
+      ;;
+  esac
+}
+
+# Truncates $SIZE based on the specified max DPI.
+# See https://en.wikipedia.org/wiki/Pixel_density#Named_pixel_densities
+#
+# Args:
+#   $1 = lo, tv, hd, xhd, xxhd, xxxhd
+#
+function set_size {
+  max_size="$1"
+  case $max_size in
+    lo)
+      SIZE=2
+      ;;
+    tv)
+      SIZE=3
+      ;;
+    hd)
+      SIZE=4
+      ;;
+    xhd)
+      SIZE=5
+      ;;
+    xxhd)
+      SIZE=6
+      ;;
+    xxxhd)
+      SIZE=10
       ;;
     *)
       return 1
@@ -126,13 +159,13 @@ function render {
   done
 }
 
-# Assembles rendered PNGs into a cursor distribution.
+# Assembles rendered PNGs into a UNIX cursor distribution.
 #
 # Args:
 #  $1 = dark, light
 #  $2 = macOS, Nord, Gruvbox, Everforest, Edge
 #
-function assemble {
+function assemble-unix {
   variant="$1"
   if [ "$2" != "macOS" ]; then
     _style=" ($2)"
@@ -183,6 +216,73 @@ function assemble {
 
   # Copy a thumbnail.png to serve as a preview in some environments.
   cp "$SRC/thumbnail-$variant.png" "$OUTPUT_DIR/thumbnail.png"
+}
+
+# Assembles rendered PNGs into a Windows cursor distribution.
+#
+# Args:
+#  $1 = dark, light
+#  $2 = macOS, Nord, Gruvbox, Everforest, Edge
+#  $3 = 2, 3, 4, 5, 6, 10
+#
+function assemble-win32 {
+  variant="$1"
+  if [ "$2" != "macOS" ]; then
+    _style=" ($2)"
+  else
+    _style=""
+  fi
+
+  THEME_NAME="Capitaine Cursors${_style}"
+
+  case "$variant" in
+    dark) THEME_NAME="$THEME_NAME" ;;
+    light) THEME_NAME="$THEME_NAME - White" ;;
+    *) exit 1 ;;
+  esac
+
+  OUTPUT_DIR="$PWD/dist-win32/$THEME_NAME"
+  mkdir -p "$OUTPUT_DIR"
+
+  cp "$BUILD_DIR/$variant/x${3}/right_ptr.png" "$OUTPUT_DIR/Alternate.png"
+  cp "$BUILD_DIR/$variant/x${3}/size_fdiag.png" "$OUTPUT_DIR/Diagonal Resize 1.png"
+  cp "$BUILD_DIR/$variant/x${3}/size_bdiag.png" "$OUTPUT_DIR/Diagonal Resize 2.png"
+  cp "$BUILD_DIR/$variant/x${3}/draft.png" "$OUTPUT_DIR/Handwriting.png"
+  cp "$BUILD_DIR/$variant/x${3}/help.png" "$OUTPUT_DIR/Help.png"
+  cp "$BUILD_DIR/$variant/x${3}/size_hor.png" "$OUTPUT_DIR/Horizontal Resize.png"
+  cp "$BUILD_DIR/$variant/x${3}/pointer.png" "$OUTPUT_DIR/Link.png"
+  cp "$BUILD_DIR/$variant/x${3}/openhand.png" "$OUTPUT_DIR/Move.png"
+  cp "$BUILD_DIR/$variant/x${3}/default.png" "$OUTPUT_DIR/Normal.png"
+  cp "$BUILD_DIR/$variant/x${3}/crosshair.png" "$OUTPUT_DIR/Precision.png"
+  cp "$BUILD_DIR/$variant/x${3}/text.png" "$OUTPUT_DIR/Text.png"
+  cp "$BUILD_DIR/$variant/x${3}/not-allowed.png" "$OUTPUT_DIR/Unavailable.png"
+  cp "$BUILD_DIR/$variant/x${3}/size_ver.png" "$OUTPUT_DIR/Vertical Resize.png"
+
+  mkdir -p "$OUTPUT_DIR/Busy"
+  cp $BUILD_DIR/$variant/x${3}/wait*.png "$OUTPUT_DIR/Busy/"
+  mkdir -p "$OUTPUT_DIR/Working"
+  cp $BUILD_DIR/$variant/x${3}/progress*.png "$OUTPUT_DIR/Working/"
+
+  # convert "$BUILD_DIR/$variant/x${3}/right_ptr.png" "icon:$OUTPUT_DIR/Alternate.cur"
+  # convert "$BUILD_DIR/$variant/x${3}/size_fdiag.png" "icon:$OUTPUT_DIR/Diagonal Resize 1.cur"
+  # convert "$BUILD_DIR/$variant/x${3}/size_bdiag.png" "icon:$OUTPUT_DIR/Diagonal Resize 2.cur"
+  # convert "$BUILD_DIR/$variant/x${3}/draft.png" "icon:$OUTPUT_DIR/Handwriting.cur"
+  # convert "$BUILD_DIR/$variant/x${3}/help.png" "icon:$OUTPUT_DIR/Help.cur"
+  # convert "$BUILD_DIR/$variant/x${3}/size_hor.png" "icon:$OUTPUT_DIR/Horizontal Resize.cur"
+  # convert "$BUILD_DIR/$variant/x${3}/pointer.png" "icon:$OUTPUT_DIR/Link.cur"
+  # convert "$BUILD_DIR/$variant/x${3}/openhand.png" "icon:$OUTPUT_DIR/Move.cur"
+  # convert "$BUILD_DIR/$variant/x${3}/default.png" "icon:$OUTPUT_DIR/Normal.cur"
+  # convert "$BUILD_DIR/$variant/x${3}/crosshair.png" "icon:$OUTPUT_DIR/Precision.cur"
+  # convert "$BUILD_DIR/$variant/x${3}/text.png" "icon:$OUTPUT_DIR/Text.cur"
+  # convert "$BUILD_DIR/$variant/x${3}/not-allowed.png" "icon:$OUTPUT_DIR/Unavailable.cur"
+  # convert "$BUILD_DIR/$variant/x${3}/size_ver.png" "icon:$OUTPUT_DIR/Vertical Resize.cur"
+
+  # TODO: .ani files
+  # x2wincur "/usr/share/icons/${_THEME}/cursors/wait" -o . && mv wait.ani "Busy.ani"
+  # x2wincur "/usr/share/icons/${_THEME}/cursors/progress" -o . && mv progress.ani "Working.ani"
+
+  cp "$PWD/Install.inf" "$OUTPUT_DIR/"
+  sed -i "s/Capitaine/$THEME_NAME/g" "$OUTPUT_DIR/Install.inf"
 }
 
 function show_usage {
@@ -375,12 +475,17 @@ elif [ "$STYLE" == "Edge" ]; then
 fi
 
 # Begin the build.
-set_sizes "$MAX_DPI" || { echo "Unrecognized DPI."; exit 1; }
-generate_in
-
-for size in "${SIZES[@]}"; do
-  render "$size" "$VARIANT"
-done
-assemble "$VARIANT" "$STYLE"
+if [ "$PLATFORM" == "unix" ]; then
+  set_sizes "$MAX_DPI" || { echo "Unrecognized DPI."; exit 1; }
+  generate_in
+  for size in "${SIZES[@]}"; do
+    render "$size" "$VARIANT"
+  done
+  assemble-unix "$VARIANT" "$STYLE"
+elif [ "$PLATFORM" == "win32" ]; then
+  set_size "$MAX_DPI" || { echo "Unrecognized DPI."; exit 1; }
+  render "$SIZE" "$VARIANT"
+  assemble-win32 "$VARIANT" "$STYLE" "$SIZE"
+fi
 
 exit 0
