@@ -300,8 +300,8 @@ if [ "$STYLE" == "Nord" ]; then
     src/svg/*/*
 elif [ "$STYLE" == "Gruvbox" ]; then
   sed -i \
-    -e 's/#fff/#ebdbb2/g' \
-    -e 's/#fefefe/#ebdbb2/g' \
+    -e 's/#fff/#f2e5bc/g' \
+    -e 's/#fefefe/#f2e5bc/g' \
     -e 's/#1a1a1a/#3c3836/g' \
     -e 's/#18c087/#8ec07c/g' \
     -e 's/#f67400/#fe8019/g' \
