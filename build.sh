@@ -135,13 +135,15 @@ function render {
 function assemble {
   variant="$1"
   if [ "$2" != "macOS" ]; then
-    style=" ($2)"
+    _style=" ($2)"
+  else
+    _style=""
   fi
 
   BASE_DIR="$DIST/$2/$variant"
   OUTPUT_DIR="$BASE_DIR/cursors"
   INDEX_FILE="$BASE_DIR/index.theme"
-  THEME_NAME="Capitaine Cursors${style}"
+  THEME_NAME="Capitaine Cursors${_style}"
 
   case "$variant" in
     dark) THEME_NAME="$THEME_NAME" ;;
