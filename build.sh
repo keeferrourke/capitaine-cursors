@@ -7,7 +7,7 @@ SRC=$PWD/src
 DIST=$PWD/dist
 VARIANTS=('dark' 'light')
 PLATFORMS=('unix' 'win32')
-STYLES=('macOS' 'Nord' 'Gruvbox' 'Everforest')
+STYLES=('macOS' 'Nord' 'Gruvbox' 'Everforest' 'Edge')
 BUILD_DIR=$PWD/_build
 SPECS="$SRC/config"
 ALIASES="$SRC/cursor-aliases"
@@ -130,7 +130,7 @@ function render {
 #
 # Args:
 #  $1 = dark, light
-#  $2 = macOS, Nord, Gruvbox, Everforest
+#  $2 = macOS, Nord, Gruvbox, Everforest, Edge
 #
 function assemble {
   variant="$1"
@@ -345,6 +345,30 @@ elif [ "$STYLE" == "Everforest" ]; then
     -e 's/#ffd305/#dbbc7f/g' \
     -e 's/#fdcf01/#dbbc7f/g' \
     -e 's/#959595/#859289/g' \
+    src/svg/*/*
+elif [ "$STYLE" == "Edge" ]; then
+  sed -i \
+    -e 's/#fff/#e8ebf0/g' \
+    -e 's/#fefefe/#e8ebf0/g' \
+    -e 's/#1a1a1a/#363a4e/g' \
+    -e 's/#18c087/#6cb6eb/g' \
+    -e 's/#f67400/#d38aea/g' \
+    -e 's/#3daee9/#6cb6eb/g' \
+    -e 's/#11d116/#a0c980/g' \
+    -e 's/#ed1515/#ec7279/g' \
+    -e 's/#ff645d/#ec7279/g' \
+    -e 's/#ff4332/#ec7279/g' \
+    -e 's/#fbb114/#deb974/g' \
+    -e 's/#ff9508/#deb974/g' \
+    -e 's/#ca70e1/#d38aea/g' \
+    -e 's/#b452cb/#d38aea/g' \
+    -e 's/#14adf6/#6cb6eb/g' \
+    -e 's/#1191f4/#6cb6eb/g' \
+    -e 's/#52cf30/#5dbbc1/g' \
+    -e 's/#3bbd1c/#5dbbc1/g' \
+    -e 's/#ffd305/#a0c980/g' \
+    -e 's/#fdcf01/#a0c980/g' \
+    -e 's/#959595/#7a819d/g' \
     src/svg/*/*
 fi
 

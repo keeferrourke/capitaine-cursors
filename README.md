@@ -48,12 +48,12 @@ The freshly compiled cursor theme will be located in the `dist/` folder.
 
 The script has a few options described below:
 
-| Option | Values                                   | Description                     |
-| :----- | :--------------------------------------- | :------------------------------ |
-| `-p`   | `unix`, `win32`                          | Build for BSD/Linux, or Windows |
-| `-t`   | `dark`, `light`                          | Choose the variant to build     |
-| `-s`   | `macOS`, `Nord`, `Gruvbox`, `Everforest` | Choose the style to build       |
-| `-d`   | See DPIs                                 | Set the max DPI to render       |
+| Option | Values                                           | Description                     |
+| :----- | :----------------------------------------------- | :------------------------------ |
+| `-p`   | `unix`, `win32`                                  | Build for BSD/Linux, or Windows |
+| `-t`   | `dark`, `light`                                  | Choose the variant to build     |
+| `-s`   | `macOS`, `Nord`, `Gruvbox`, `Everforest`, `Edge` | Choose the style to build       |
+| `-d`   | See DPIs                                         | Set the max DPI to render       |
 
 <small>*Note: building the win32 cursors from source is not currently supported, but it is on the roadmap.</small>
 
