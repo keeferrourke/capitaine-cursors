@@ -7,6 +7,12 @@ The source files were made in Inkscape, and the theme was designed to pair well 
 
 This cursor should scale appropriately for any display resolution.
 
+## Preview
+
+| Dark                                  | Light                                   |
+| ------------------------------------- | --------------------------------------- |
+| ![Dark version](share/thumb/dark.png) | ![Light version](share/thumb/light.png) |
+
 ## Supported DPIs
 
 This cursor pack aims to support all [named pixel densities][named-dpi].
@@ -106,18 +112,12 @@ The Windows build comes with an INF file to make installation easy.
 3.  Open `Control Panel` > `Personalisation and Appearance` > `Change mouse pointers`, and select Capitaine cursors.
 4.  Click 'Apply'.
 
+## Donations
+
+If you like this cursor theme and want to support me, please consider [donating](https://paypal.me/keeferrourke).
+
 ## License
 
 Capitaine cursors is based on KDE Breeze cursors, as such it falls under the same license.
 
 Capitaine cursors is LGPLv3. See COPYING for more details.
-
-## Donations
-
-If you like this cursor theme and want to support me, please consider [donating](https://paypal.me/keeferrourke).
-
-## Preview
-
-| Dark                                  | Light                                   |
-| ------------------------------------- | --------------------------------------- |
-| ![Dark version](share/thumb/dark.png) | ![Light version](share/thumb/light.png) |
