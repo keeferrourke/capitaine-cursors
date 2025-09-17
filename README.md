@@ -24,17 +24,13 @@ This cursor pack aims to support all [named pixel densities](https://en.wikipedi
 | XXHDPI  | `-d xxhd`         | 384-480                | x4, x5         |
 | XXXHDPI | `-d xxxhd`        | 576+                   | x6, x10        |
 
-## Building from source
+## Documentation
 
-See [`Build.md`](docs/Build.md).
+See docs [here](docs/Main.md).
 
 ## Pre-built binaries
 
 Pre-built binaries are available for download at [pling.com](https://www.pling.com/p/1148692) :heart:
-
-## Installation
-
-See [`Install.md`](docs/Install.md).
 
 ## Donations
 
