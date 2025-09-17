@@ -72,7 +72,9 @@ function generate_in {
       dim=$(echo "$SVG_DIM*$size" | bc)
       xhot=$(echo "$xhot_spec*$size" | bc)
       yhot=$(echo "$yhot_spec*$size" | bc)
-      dim=${dim%.*} xhot=${xhot%.*} yhot=${yhot%.*} # Strip decimals parts if any.
+      dim=$(printf "%.0f" "$dim")
+      xhot=$(printf "%.0f" "$xhot")
+      yhot=$(printf "%.0f" "$yhot")
       echo "$dim $xhot $yhot x$size/$cur_name.png" | tee -a "$target"
     done
   done
@@ -86,7 +88,9 @@ function generate_in {
       dim=$(echo "$SVG_DIM*$size" | bc)
       xhot=$(echo "$xhot_spec*$size" | bc)
       yhot=$(echo "$yhot_spec*$size" | bc)
-      dim=${dim%.*} xhot=${xhot%.*} yhot=${yhot%.*} # Strip decimals parts if any.
+      dim=$(printf "%.0f" "$dim")
+      xhot=$(printf "%.0f" "$xhot")
+      yhot=$(printf "%.0f" "$yhot")
       for ((i=0; i < frames ; i++)); do
         i_pad=$(printf "%02d" $i)
         echo "$dim $xhot $yhot x$size/$cur_name-$i_pad.png $delay" | tee -a "$target"
@@ -104,10 +108,11 @@ function generate_in {
 function render {
   name="x$1"
   variant="$2"
-  size=$(echo "$SVG_DIM*$1" | bc)
-  dpi=$(echo "$SVG_DPI*$1" | bc)
+  size=$(echo "$SVG_DIM*$1" | bc -l)
+  dpi=$(echo "$SVG_DPI*$1" | bc -l)
 
-  size=${size%.*} dpi=${size%.*} # Strip decimal parts if any.
+  size=$(printf "%.0f" "$size")
+  dpi=$(printf "%.0f" "$dpi")
 
   OUTPUT_DIR="$BUILD_DIR/$variant/$name"
   mkdir -p "$OUTPUT_DIR"
