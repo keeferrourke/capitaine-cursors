@@ -108,11 +108,8 @@ function generate_in {
 function render {
   name="x$1"
   variant="$2"
-  size=$(echo "$SVG_DIM*$1" | bc -l)
-  dpi=$(echo "$SVG_DPI*$1" | bc -l)
-
-  size=$(printf "%.0f" "$size")
-  dpi=$(printf "%.0f" "$dpi")
+  size=$(echo "($SVG_DIM*$1+0.5)/1" | bc)
+  dpi=$(echo "($SVG_DPI*$1+0.5)/1" | bc)
 
   OUTPUT_DIR="$BUILD_DIR/$variant/$name"
   mkdir -p "$OUTPUT_DIR"
