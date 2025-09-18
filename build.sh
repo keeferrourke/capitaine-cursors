@@ -72,9 +72,9 @@ function generate_in {
       dim=$(echo "$SVG_DIM*$size" | bc)
       xhot=$(echo "$xhot_spec*$size" | bc)
       yhot=$(echo "$yhot_spec*$size" | bc)
-      dim=$(printf "%.0f" "$dim")
-      xhot=$(printf "%.0f" "$xhot")
-      yhot=$(printf "%.0f" "$yhot")
+      dim=$(echo "($dim+0.5)/1" | bc)
+      xhot=$(echo "($xhot+0.5)/1" | bc)
+      yhot=$(echo "($yhot+0.5)/1" | bc)
       echo "$dim $xhot $yhot x$size/$cur_name.png" | tee -a "$target"
     done
   done
@@ -88,9 +88,9 @@ function generate_in {
       dim=$(echo "$SVG_DIM*$size" | bc)
       xhot=$(echo "$xhot_spec*$size" | bc)
       yhot=$(echo "$yhot_spec*$size" | bc)
-      dim=$(printf "%.0f" "$dim")
-      xhot=$(printf "%.0f" "$xhot")
-      yhot=$(printf "%.0f" "$yhot")
+      dim=$(echo "($dim+0.5)/1" | bc)
+      xhot=$(echo "($xhot+0.5)/1" | bc)
+      yhot=$(echo "($yhot+0.5)/1" | bc)
       for ((i=0; i < frames ; i++)); do
         i_pad=$(printf "%02d" $i)
         echo "$dim $xhot $yhot x$size/$cur_name-$i_pad.png $delay" | tee -a "$target"
