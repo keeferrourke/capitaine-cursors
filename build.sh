@@ -125,6 +125,60 @@ function render {
   done
 }
 
+function generate_svg_cursors {
+  variant="$1"
+  local BASE_DIR="$DIST/$variant"
+  local OUTPUT_DIR="$BASE_DIR/cursors_scalable"
+  
+  mkdir -p $OUTPUT_DIR
+
+  for spec in "$SPECS"/static/*.spec; do
+    IFS=" " read -r xhot_spec yhot_spec < "$spec"
+    cur_name="$(basename "${spec%.*}")"
+
+    local CURSOR_OUTPUT_DIR="$OUTPUT_DIR/$cur_name"
+
+    mkdir -p $CURSOR_OUTPUT_DIR
+    cp "$SRC/svg/$variant/$cur_name.svg" "$CURSOR_OUTPUT_DIR/$cur_name.svg"
+    echo "[{\"filename\": \"$cur_name.svg\", \"hotspot_x\": $xhot_spec, \"hotspot_y\": $yhot_spec, \"nominal_size\": 24}]" > "$CURSOR_OUTPUT_DIR/metadata.json"
+  done
+
+  for spec in "$SPECS"/animated/*.spec; do
+    IFS=" " read -r xhot_spec yhot_spec frames delay < "$spec"
+    cur_name="$(basename "${spec%.*}")"
+
+    local CURSOR_OUTPUT_DIR="$OUTPUT_DIR/$cur_name"
+
+    mkdir -p $CURSOR_OUTPUT_DIR
+
+    METADATA="["
+
+    for ((i=0; i < frames ; i++)); do
+      i_pad=$(printf "%02d" $i)
+
+      cp "$SRC/svg/$variant/$cur_name-$i_pad.svg" "$CURSOR_OUTPUT_DIR/$cur_name-$i_pad.svg"
+      if [ "$i" -ne "0" ]; then
+        METADATA+=","
+      fi
+      METADATA+="{\"filename\": \"$cur_name-$i_pad.svg\", \"delay\": $delay, \"hotspot_x\": $xhot_spec, \"hotspot_y\": $yhot_spec, \"nominal_size\": 24}"
+    done
+
+    METADATA+="]"
+    echo $METADATA > "$CURSOR_OUTPUT_DIR/metadata.json"
+  done
+
+  pushd "$OUTPUT_DIR" > /dev/null || return 1
+  while read -r cur_alias; do
+    from="${cur_alias#* }"
+    to="${cur_alias% *}"
+
+    if [ -e "$to" ]; then continue; fi
+
+    ln -s "$from" "$to"
+  done < "$ALIASES"
+  popd > /dev/null || return 1
+}
+
 # Assembles rendered PNGs into a cursor distribution.
 #
 # Args:
@@ -167,6 +221,8 @@ function assemble {
     ln -s "$from" "$to"
   done < "$ALIASES"
   popd > /dev/null || return 1
+
+  generate_svg_cursors "$variant" || return 1
 
   # Write the index.theme file.
   if [ ! -e "$INDEX_FILE" ]; then
